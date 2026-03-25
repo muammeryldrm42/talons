@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { activities, units, zones } from '@/lib/talons-data';
 import { formatSpeed, getZoneId, getZoneName } from '@/lib/world';
 import { useGameStore } from '@/components/game/store';
@@ -58,10 +58,22 @@ function Hud() {
   const resetRun = useGameStore((state) => state.resetRun);
   const startedAt = useGameStore((state) => state.startTime);
 
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setNow(Date.now());
+    }, 1000);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, []);
+
   const activeUnit = units.find((unit) => unit.id === activeUnitId) ?? units[0];
   const activeZoneId = getZoneId(position.x, position.z);
   const activeZone = zones.find((zone) => zone.id === activeZoneId);
-  const uptime = Math.max(0, Math.floor((Date.now() - startedAt) / 1000));
+  const uptime = Math.max(0, Math.floor((now - startedAt) / 1000));
 
   return (
     <div className="overlay">

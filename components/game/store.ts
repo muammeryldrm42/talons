@@ -30,7 +30,7 @@ type GameState = {
   resetRun: () => void;
 };
 
-export const useGameStore = create<GameState>((set, get) => ({
+export const useGameStore = create<GameState>((set) => ({
   activeUnitId: defaultUnit.id,
   position: { x: 18, y: 2, z: -38 },
   heading: Math.PI,

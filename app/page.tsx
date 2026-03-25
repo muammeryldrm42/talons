@@ -1,9 +1,4 @@
-import dynamic from 'next/dynamic';
-
-const TalonsGame = dynamic(() => import('@/components/game/talons-game'), {
-  ssr: false,
-  loading: () => <div className="booting">Booting Talons…</div>,
-});
+import TalonsGame from '@/components/game/talons-game';
 
 export default function Home() {
   return <TalonsGame />;
