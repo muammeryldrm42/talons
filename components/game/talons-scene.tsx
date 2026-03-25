@@ -377,6 +377,7 @@ function UnitController() {
   const registerZone = useGameStore((state) => state.registerZone);
   const markBridgeCrossed = useGameStore((state) => state.markBridgeCrossed);
   const setVelocityBadge = useGameStore((state) => state.setVelocityBadge);
+  const renderSpeed = useGameStore((state) => state.speed);
 
   const activeUnit = units.find((unit) => unit.id === activeUnitId) ?? units[0];
   const position = useRef(new THREE.Vector3(storePosition.x, storePosition.y, storePosition.z));
@@ -449,9 +450,9 @@ function UnitController() {
   return (
     <group ref={group}>
       {activeUnit.mode === 'mech' ? (
-        <MechModel unitId={activeUnit.id} color={activeUnit.color} accent={activeUnit.accent} speed={velocity.current} />
+        <MechModel unitId={activeUnit.id} color={activeUnit.color} accent={activeUnit.accent} speed={renderSpeed} />
       ) : (
-        <VehicleModel unitId={activeUnit.id} color={activeUnit.color} accent={activeUnit.accent} speed={velocity.current} />
+        <VehicleModel unitId={activeUnit.id} color={activeUnit.color} accent={activeUnit.accent} speed={renderSpeed} />
       )}
       <pointLight position={[0, 4.4, 1.4]} color={activeUnit.accent} intensity={12} distance={8} decay={2} />
     </group>
