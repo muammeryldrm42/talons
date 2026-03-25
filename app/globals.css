@@ -1,0 +1,363 @@
+:root {
+  color-scheme: dark;
+  --bg: #071018;
+  --panel: rgba(7, 18, 28, 0.72);
+  --panel-strong: rgba(5, 15, 24, 0.92);
+  --border: rgba(122, 234, 255, 0.24);
+  --accent: #69f3ff;
+  --accent-2: #ffa95d;
+  --text: #f4f9ff;
+  --muted: #88a9be;
+  --success: #86ffb7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top, rgba(36, 87, 124, 0.55), transparent 32%),
+    linear-gradient(180deg, #08111a 0%, #050a10 100%);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.booting {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at center, rgba(105, 243, 255, 0.16), transparent 30%),
+    linear-gradient(180deg, #08111a 0%, #050a10 100%);
+  color: var(--accent);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.game-shell {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.game-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 320px 1fr 330px;
+  gap: 18px;
+  padding: 18px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.column.center {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel {
+  pointer-events: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  border-radius: 18px;
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.35);
+}
+
+.panel.pad {
+  padding: 16px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--accent);
+}
+
+.title {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.subtitle,
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stat-card {
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(9, 21, 32, 0.74);
+  border: 1px solid rgba(122, 234, 255, 0.14);
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 22px;
+  margin-top: 6px;
+}
+
+.unit-list {
+  display: grid;
+  gap: 10px;
+}
+
+.unit-card {
+  width: 100%;
+  text-align: left;
+  color: var(--text);
+  background: rgba(8, 20, 32, 0.76);
+  border: 1px solid rgba(122, 234, 255, 0.14);
+  border-radius: 16px;
+  padding: 12px;
+  display: grid;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.unit-card:hover,
+.unit-card.active {
+  transform: translateY(-2px);
+  border-color: rgba(122, 234, 255, 0.72);
+  box-shadow: 0 10px 30px rgba(105, 243, 255, 0.12);
+}
+
+.unit-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border: 1px solid rgba(122, 234, 255, 0.24);
+  color: var(--accent);
+  background: rgba(6, 16, 25, 0.55);
+}
+
+.unit-bars {
+  display: grid;
+  gap: 8px;
+}
+
+.bar {
+  display: grid;
+  gap: 4px;
+}
+
+.bar-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.bar-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.help-list,
+.activity-list,
+.zone-list {
+  display: grid;
+  gap: 10px;
+}
+
+.help-row,
+.activity-row,
+.zone-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.help-key {
+  min-width: 72px;
+  border-radius: 10px;
+  padding: 7px 10px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+}
+
+.top-chip {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(7, 18, 28, 0.72);
+  border: 1px solid rgba(122, 234, 255, 0.2);
+  backdrop-filter: blur(14px);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.mini-map {
+  position: relative;
+  height: 210px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(15, 30, 46, 0.95), rgba(7, 17, 27, 0.98));
+  overflow: hidden;
+  border: 1px solid rgba(122, 234, 255, 0.15);
+}
+
+.mini-map::before,
+.mini-map::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.mini-map::before {
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(122, 234, 255, 0.08) 50%, transparent 51%),
+    linear-gradient(transparent 49%, rgba(122, 234, 255, 0.08) 50%, transparent 51%);
+  background-size: 100% 100%, 100% 100%;
+}
+
+.map-road,
+.map-zone,
+.map-player,
+.map-bridge {
+  position: absolute;
+}
+
+.map-zone {
+  border: 1px dashed rgba(122, 234, 255, 0.14);
+  border-radius: 12px;
+}
+
+.map-road {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+
+.map-bridge {
+  background: rgba(255, 169, 93, 0.34);
+  border-radius: 999px;
+}
+
+.map-player {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(105, 243, 255, 0.18);
+  transform: translate(-50%, -50%);
+}
+
+.footer-panel {
+  align-self: end;
+  width: min(720px, 100%);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.footer-card {
+  background: rgba(9, 21, 32, 0.76);
+  border: 1px solid rgba(122, 234, 255, 0.12);
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.zone-pill {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+@media (max-width: 1180px) {
+  .overlay {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    overflow: auto;
+  }
+
+  .column.center {
+    order: -1;
+    align-items: stretch;
+  }
+
+  .footer-panel {
+    width: 100%;
+  }
+}
